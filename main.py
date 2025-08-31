@@ -42,6 +42,14 @@ def init_gemini():
     )
     return model
 
+# Função para gerar resposta do chatbot
+def generate_response(model, prompt):
+    try:
+        response = model.generate_content(prompt)
+        return response.text
+    except Exception as e:
+        return f"Erro ao gerar resposta: {str(e)}"
+
 # Função para gerar resposta do chatbot# Função para GERAR uma resposta, com tratamento de erros
     try:
         response = model.generate_content(prompt)
@@ -121,3 +129,4 @@ if prompt := st.chat_input("💬 Digite sua mensagem aqui..."):
     
     # Adicionar resposta ao histórico
     st.session_state.messages.append({"role": "assistant", "content": response})
+
