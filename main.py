@@ -50,13 +50,6 @@ def generate_response(model, prompt):
     except Exception as e:
         return f"Erro ao gerar resposta: {str(e)}"
 
-# Função para gerar resposta do chatbot# Função para GERAR uma resposta, com tratamento de erros
-    try:
-        response = model.generate_content(prompt)
-        return response.text
-    except Exception as e:
-        return f"Erro ao gerar resposta: {str(e)}"
-
 # Configuração da sidebar apenas com estatísticas
 with st.sidebar:
     st.header("⚙️ Configurações")
