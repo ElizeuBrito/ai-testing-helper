@@ -62,6 +62,7 @@ resource "aws_instance" "chatbot_gemini" {
   # Run the application with nohup
   nohup streamlit run main.py --server.port 8501 --server.address 0.0.0.0 &
 EOF
+}
 
 output "instance_public_ip" {
   value = aws_instance.chatbot_gemini.public_ip
