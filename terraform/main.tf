@@ -13,7 +13,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "example" {
-    bucket = "meu-bucket-exemplo-terraform"
+    bucket = "projeto-final-ia-elizeubrito"
     acl    = "private"
 }
 
@@ -52,7 +52,7 @@ resource "aws_security_group" "chatbot_sg" {
 resource "aws_instance" "chatbot_gemini" {
   ami           = "ami-0fc61db8544a617ed" # Ubuntu Server 22.04 LTS (verifique se há uma mais recente)
   instance_type = "t2.micro"
-  key_name      = "SEU_KEY_PAIR"          # Substitua pelo nome do seu key pair
+  key_name      = "AI_Testing_H"          # Substitua pelo nome do seu key pair
 
   vpc_security_group_ids = [aws_security_group.chatbot_sg.id]
 
