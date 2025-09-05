@@ -26,6 +26,12 @@ data "aws_security_group" "chatbot_sg" {
   name = "chatbot-gemini-sg"
 }
 
+variable "gemini_api_key" {
+  description = "The API key for the Gemini model."
+  type        = string
+  sensitive   = true # Mark as sensitive so it's not shown in the plan output
+}
+
 resource "aws_instance" "chatbot_gemini" {
   ami           = "ami-00ca32bbc84273381"
   instance_type = "t2.micro"
