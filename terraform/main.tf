@@ -27,7 +27,7 @@ data "aws_security_group" "chatbot_sg" {
 }
 
 resource "aws_instance" "chatbot_gemini" {
-  ami           = "ami-041a8a25d2c00224a"
+  ami           = "ami-00ca32bbc84273381"
   instance_type = "t2.micro"
   key_name      = "AI_Testing_H"
 
