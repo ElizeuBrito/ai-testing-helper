@@ -53,7 +53,7 @@ resource "aws_instance" "chatbot_gemini" {
   source .venv/bin/activate
   
   # Install pip and requirements
-  pip install --updgrade pip
+  pip install --upgrade pip
   pip install -r requirements.txt
   
   # Install streamlit in the virtual environment
