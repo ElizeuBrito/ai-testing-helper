@@ -1,60 +1,38 @@
 terraform {
-    required_providers {
-        aws = {
-            source  = "hashicorp/aws"
-            version = "~> 5.0"
-        }
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
     }
-    required_version = ">= 1.3.0"
+  }
+  required_version = ">= 1.3.0"
 }
 
 provider "aws" {
-    region = "us-east-1"
+  region = "us-east-1"
 }
 
-resource "aws_s3_bucket" "example" {
-    bucket = "projeto-ai-testing-helper"
-    acl    = "private"
+# This DATA SOURCE finds the existing S3 bucket
+data "aws_s3_bucket" "example" {
+  bucket = "projeto-ai-testing-helper"
 }
 
 output "bucket_name" {
-    value = aws_s3_bucket.example.bucket
+  value = data.aws_s3_bucket.example.bucket
 }
 
-resource "aws_security_group" "chatbot_sg" {
-  name        = "chatbot-gemini-sg"
-  description = "Permite acesso SSH e HTTP para Streamlit"
-
-  ingress {
-    description = "SSH"
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    description = "Streamlit"
-    from_port   = 8501
-    to_port     = 8501
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+# This DATA SOURCE finds the existing security group
+data "aws_security_group" "chatbot_sg" {
+  name = "chatbot-gemini-sg"
 }
 
 resource "aws_instance" "chatbot_gemini" {
-  ami           = "ami-0fc61db8544a617ed" # Ubuntu Server 22.04 LTS (verifique se há uma mais recente)
+  ami           = "ami-0fc61db8544a617ed" 
   instance_type = "t2.micro"
-  key_name      = "AI_Testing_H"          # Substitua pelo nome do seu key pair
+  key_name      = "AI_Testing_H"
 
-  vpc_security_group_ids = [aws_security_group.chatbot_sg.id]
+  # The instance uses the ID from the existing security group
+  vpc_security_group_ids = [data.aws_security_group.chatbot_sg.id]
 
   tags = {
     Name = "Chatbot-Gemini"
