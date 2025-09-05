@@ -39,16 +39,16 @@ resource "aws_instance" "chatbot_gemini" {
   }
 
   user_data = <<-EOF
-    #!/bin/bash
-    sudo apt-get update
-    sudo apt-get install -y python3 python3-pip python3-venv git
-    git clone https://github.com/ElizeuBrito/ai-testing-helper.git /home/ubuntu/projeto-final-ia
-    cd /home/ubuntu/projeto-final-ia
-    python3 -m venv .venv
-    source .venv/bin/activate
-    pip install -r requirements.txt
-    streamlit run main.py --server.port 8501 --server.address 0.0.0.0 &
-  EOF
+  #!/bin/bash
+  sudo apt-get update
+  sudo apt-get install -y python3 python3-pip python3-venv git
+  git clone https://github.com/ElizeuBrito/ai-testing-helper.git /home/ubuntu/projeto-final-ia
+  cd /home/ubuntu/projeto-final-ia
+  python3 -m venv .venv
+  source .venv/bin/activate
+  pip install -r requirements.txt
+  nohup streamlit run main.py --server.port 8501 --server.address 0.0.0.0 &
+EOF
 }
 
 output "instance_public_ip" {
