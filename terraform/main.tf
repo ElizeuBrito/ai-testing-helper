@@ -13,7 +13,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "example" {
-    bucket = "projeto-final-ia-testing_helper"
+    bucket = "projeto-ai-testing-helper"
     acl    = "private"
 }
 

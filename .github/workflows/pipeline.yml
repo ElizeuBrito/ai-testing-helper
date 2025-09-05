@@ -33,8 +33,8 @@ jobs:
           # Import the Security Group
           terraform import aws_security_group.chatbot_sg sg-0391a120c842d854c
 
-          # Import the S3 Bucket (optional, if it also exists)
-          terraform import aws_s3_bucket.example projeto-final-ia-testing_helper
+          # Import the S3 Bucket
+          terraform import aws_s3_bucket.example projeto-ai-testing-helper
         continue-on-error: true # This makes the job continue even if the import fails (e.g., resource not found or already in state)
       
       - name: Gerar plano do Terraform
