@@ -30,6 +30,7 @@ resource "aws_instance" "chatbot_gemini" {
   ami           = "ami-00ca32bbc84273381"
   instance_type = "t2.micro"
   key_name      = "AI_Testing_H"
+  associate_public_ip_address = true
 
   # The instance uses the ID from the existing security group
   vpc_security_group_ids = [data.aws_security_group.chatbot_sg.id]
