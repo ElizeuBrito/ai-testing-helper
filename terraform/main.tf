@@ -12,15 +12,9 @@ provider "aws" {
     region = "us-east-1"
 }
 
-resource "random_string" "random" {
-  length  = 6
-  special = false
-  upper   = false
-}
-
 resource "aws_s3_bucket" "example" {
-  bucket = "projeto-final-ia-${random_string.random.id}"
-  acl    = "private"
+    bucket = "projeto-final-ia-testing_helper"
+    acl    = "private"
 }
 
 output "bucket_name" {

@@ -25,6 +25,22 @@ jobs:
         working-directory: terraform
         run: terraform init
 
+      - name: Importar recursos existentes
+        # This step is conditional to avoid errors if the resource is already in state.
+        # It's only for the first run or if the state file is lost.
+        working-directory: terraform
+        run: |
+          # Import the Security Group
+          terraform import aws_security_group.chatbot_sg sg-0391a120c842d854c
+
+          # Import the S3 Bucket (optional, if it also exists)
+          terraform import aws_s3_bucket.example projeto-final-ia-testing_helper
+        continue-on-error: true # This makes the job continue even if the import fails (e.g., resource not found or already in state)
+      
+      - name: Gerar plano do Terraform
+        working-directory: terraform
+        run: terraform plan -out=tfplan
+
       - name: Aplicar Terraform (Provisionar Infraestrutura)
         working-directory: terraform
-        run: terraform apply -auto-approve
+        run: terraform apply -auto-approve tfplan
