@@ -47,7 +47,7 @@ resource "aws_instance" "chatbot_gemini" {
     python3 -m venv .venv
     source .venv/bin/activate
     pip install -r requirements.txt
-    nohup streamlit run main.py --server.port 8501 --server.address 0.0.0.0 &
+    streamlit run main.py --server.port 8501 --server.address 0.0.0.0 &
   EOF
 }
 
