@@ -40,13 +40,25 @@ resource "aws_instance" "chatbot_gemini" {
 
   user_data = <<-EOF
   #!/bin/bash
-  sudo apt-get update
-  sudo apt-get install -y python3 python3-pip python3-venv git
-  git clone https://github.com/ElizeuBrito/ai-testing-helper.git /home/ubuntu/projeto-final-ia
-  cd /home/ubuntu/projeto-final-ia
+  # Use yum for Amazon Linux
+  sudo yum update -y
+  sudo yum install -y python3 git
+
+  # Git clone and setup
+  git clone https://github.com/ElizeuBrito/ai-testing-helper.git /home/ec2-user/projeto-final-ia
+  cd /home/ec2-user/projeto-final-ia
+
+  # Use the correct python3 version to create a venv
   python3 -m venv .venv
   source .venv/bin/activate
+  
+  # Install pip and requirements
   pip install -r requirements.txt
+  
+  # Install streamlit in the virtual environment
+  pip install streamlit
+
+  # Run the application with nohup and redirect output to a log file
   nohup streamlit run main.py --server.port 8501 --server.address 0.0.0.0 &
 EOF
 }
