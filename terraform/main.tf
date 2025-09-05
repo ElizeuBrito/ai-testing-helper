@@ -60,6 +60,9 @@ resource "aws_instance" "chatbot_gemini" {
   # Install streamlit in the virtual environment
   pip install streamlit
 
+  # Exporting variables
+  export GEMINI_API_KEY
+  echo "GitHub Gemini variable -> $GEMINI_API_KEY"
   # Run the application with nohup
   nohup streamlit run main.py --server.port 8501 --server.address 0.0.0.0 &
 EOF
