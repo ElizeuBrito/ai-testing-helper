@@ -27,7 +27,7 @@ data "aws_security_group" "chatbot_sg" {
 }
 
 resource "aws_instance" "chatbot_gemini" {
-  ami           = "ami-0fc61db8544a617ed" 
+  ami           = "ami-041a8a25d2c00224a" # A recent Ubuntu Server 22.04 LTS AMI in us-east-1
   instance_type = "t2.micro"
   key_name      = "AI_Testing_H"
 
@@ -40,28 +40,16 @@ resource "aws_instance" "chatbot_gemini" {
 
   user_data = <<-EOF
   #!/bin/bash
-  # Use yum for Amazon Linux
-  sudo yum update -y
-  sudo yum install -y python3 git
-
-  # Git clone and setup
-  git clone https://github.com/ElizeuBrito/ai-testing-helper.git /home/ec2-user/projeto-final-ia
-  cd /home/ec2-user/projeto-final-ia
-
-  # Use the correct python3 version to create a venv
+  sudo apt-get update
+  sudo apt-get install -y python3 python3-pip python3-venv git
+  git clone https://github.com/ElizeuBrito/ai-testing-helper.git /home/ubuntu/projeto-final-ia
+  cd /home/ubuntu/projeto-final-ia
   python3 -m venv .venv
   source .venv/bin/activate
-  
-  # Install pip and requirements
-  pip install --upgrade pip
   pip install -r requirements.txt
-  
-  # Install streamlit in the virtual environment
-  pip install streamlit
-
-  # Run the application with nohup and redirect output to a log file
   nohup streamlit run main.py --server.port 8501 --server.address 0.0.0.0 &
 EOF
+
 }
 
 output "instance_public_ip" {
