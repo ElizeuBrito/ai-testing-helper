@@ -27,7 +27,7 @@ data "aws_security_group" "chatbot_sg" {
 }
 
 resource "aws_instance" "chatbot_gemini" {
-  ami           = "ami-041a8a25d2c00224a" # A recent Ubuntu Server 22.04 LTS AMI in us-east-1
+  ami           = "ami-041a8a25d2c00224a"
   instance_type = "t2.micro"
   key_name      = "AI_Testing_H"
 
@@ -49,7 +49,6 @@ resource "aws_instance" "chatbot_gemini" {
   pip install -r requirements.txt
   nohup streamlit run main.py --server.port 8501 --server.address 0.0.0.0 &
 EOF
-
 }
 
 output "instance_public_ip" {
