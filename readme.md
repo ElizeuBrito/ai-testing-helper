@@ -1,8 +1,8 @@
-# IA Testing Helper
+# AI Testing Helper
 
 ## Introdução
 
-O IA Testing Helper é uma ferramenta de Inteligência Artificial generativa projetada para auxiliar desenvolvedores e profissionais de Quality Assurance (QA) na criação de testes unitários. Por meio de uma interface de chat intuitiva, os usuários poderão submeter funções de código e receber sugestões de testes unitários robustos e abrangentes, otimizando o ciclo de desenvolvimento e garantindo a qualidade do software.
+O AI Testing Helper é uma ferramenta de Inteligência Artificial generativa projetada para auxiliar desenvolvedores e profissionais de Quality Assurance (QA) na criação de testes unitários. Por meio de uma interface de chat intuitiva, os usuários poderão submeter funções de código e receber sugestões de testes unitários robustos e abrangentes, otimizando o ciclo de desenvolvimento e garantindo a qualidade do software.
 
 ## A problemática
 
@@ -18,23 +18,23 @@ A criação de testes unitários é uma prática fundamental no desenvolvimento 
 
 - **Dificuldade em Isolar Unidades**: Em código com alto acoplamento, isolar uma unidade para teste se torna uma tarefa complexa, desencorajando a prática da escrita de testes.
 
-O **IA Testing Helper** visa endereçar esses problemas, automatizando e simplificando a geração de testes unitários, permitindo que as equipes de desenvolvimento aumentem a cobertura de testes e a qualidade do código de forma mais eficiente.
+O **AI Testing Helper** visa endereçar esses problemas, automatizando e simplificando a geração de testes unitários, permitindo que as equipes de desenvolvimento aumentem a cobertura de testes e a qualidade do código de forma mais eficiente.
 
 ## Quem utilizará?
 
 A ferramenta foi projetada para ser utilizada por dois perfis principais dentro do ciclo de desenvolvimento de software:
 
-- **Desenvolvedores (Back-end, Front-end, Full-stack)**: São os principais responsáveis pela escrita do código e, tradicionalmente, pela criação dos testes unitários. Para eles, o IA Testing Helper servirá como um assistente inteligente, acelerando a criação de testes, sugerindo casos de teste que talvez não tivessem considerado e garantindo uma base sólida de testes para o código que produzem. Isso permite que se concentrem mais na lógica de negócio e na implementação de novas funcionalidades.
+- **Desenvolvedores (Back-end, Front-end, Full-stack)**: São os principais responsáveis pela escrita do código e, tradicionalmente, pela criação dos testes unitários. Para eles, o AI Testing Helper servirá como um assistente inteligente, acelerando a criação de testes, sugerindo casos de teste que talvez não tivessem considerado e garantindo uma base sólida de testes para o código que produzem. Isso permite que se concentrem mais na lógica de negócio e na implementação de novas funcionalidades.
 
-- **Analistas de Qualidade (QAs) e Engenheiros de Teste**: Embora o foco principal dos QAs seja em testes de integração, sistema e end-to-end, a participação na estratégia de testes unitários é cada vez mais comum. Com o IA Testing Helper, os profissionais de QA poderão revisar os testes gerados, sugerir melhorias e até mesmo gerar testes para funções críticas de forma autônoma, contribuindo para uma cultura de qualidade desde as fases iniciais do desenvolvimento. A ferramenta pode servir como um ponto de colaboração entre desenvolvedores e QAs para garantir a robustez do software.
+- **Analistas de Qualidade (QAs) e Engenheiros de Teste**: Embora o foco principal dos QAs seja em testes de integração, sistema e end-to-end, a participação na estratégia de testes unitários é cada vez mais comum. Com o AI Testing Helper, os profissionais de QA poderão revisar os testes gerados, sugerir melhorias e até mesmo gerar testes para funções críticas de forma autônoma, contribuindo para uma cultura de qualidade desde as fases iniciais do desenvolvimento. A ferramenta pode servir como um ponto de colaboração entre desenvolvedores e QAs para garantir a robustez do software.
 
 ## Funcionalidade Principal
 
-O núcleo do IA Testing Helper reside em sua capacidade de gerar testes unitários de forma inteligente e interativa. A funcionalidade principal será entregue por meio de uma interface de chat simples e direta, implementada com Streamlit:
+O núcleo do AI Testing Helper reside em sua capacidade de gerar testes unitários de forma inteligente e interativa. A funcionalidade principal será entregue por meio de uma interface de chat simples e direta, implementada com Streamlit:
 
 ### Geração de Testes Unitários via Chat:
 
-- **Entrada do Usuário**: O usuário (desenvolvedor ou QA) irá interagir com um chat onde poderá colar o trecho de código de uma função específica escrita em Python.
+- **Entrada do Usuário**: O usuário (desenvolvedor ou QA) irá interagir com um chat onde poderá colar o trecho de código de uma função específica escrita em Python ou em outras linguagens de programação.
 
 - **Processamento com IA Generativa**: A ferramenta enviará o código para um modelo de linguagem de grande porte (LLM) especializado em compreensão e geração de código. A IA analisará a lógica da função, identificando os diferentes caminhos de execução, parâmetros de entrada e possíveis saídas.
 
@@ -96,3 +96,18 @@ pytest test_main.py -m integration -v
 ```bash
 ./run_tests.sh
 ```
+
+## Scripts de IaC e Github Actions
+
+O AI Testing Helper conta com uma estrutura de IaC para provisionamento de infraestrutura em nuvem. A ferramenta utilizada para a escrita dos scritps foi o Terraform, e o provedor de nuvem escolhido foi a AWS (Amazon Web Services). Para o provisionamento foi utilizada uma instância EC2 dispondo de:
+
+- Bucket S3
+- Security Groups com permissão de acessos SSH e HTTP
+
+Para o deploy da ferramenta na AWS foi criado um script de pipeline no formato .yml utilizando os recursos do Github Actions. Neste contexto, o Github Actions auxiliou nos seguintes pontos:
+
+- Checkout da aplicação
+- Configuração do Python
+- Instalação de dependências do projeto
+- Execução de testes automatizados unitários do projeto
+- Chamada do script do Terraform para deploy e provisionamento da ferramenta na AWS
