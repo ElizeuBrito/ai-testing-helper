@@ -65,7 +65,6 @@ resource "aws_instance" "chatbot_gemini" {
 
   # Install streamlit in the virtual environment
   pip install streamlit
-
   
   # Create a .env file with the API key
   echo "GEMINI_API_KEY='${var.gemini_api_key}'" > .env

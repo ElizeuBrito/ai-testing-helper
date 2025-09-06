@@ -19,13 +19,15 @@ jobs:
       - name: Checkout do código
         uses: actions/checkout@v4
 
+      - name: Rodas testes de unidade
+        run: ./run_tests.sh
+
       - name: Instalar Terraform
         uses: hashicorp/setup-terraform@v3
 
       - name: Inicializar Terraform
         working-directory: terraform
         run: terraform init
-
       # The import step is removed because we are now using data sources.
       
       - name: Gerar plano do Terraform

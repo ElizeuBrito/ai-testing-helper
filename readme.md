@@ -70,3 +70,29 @@ Essa funcionalidade central permitirá uma criação de testes mais rápida, con
 5. Acesse `http://localhost:8501` para acessar o chat.
 
 Obs.: Para desabilitar o ambiente virtual rode o comando `deactivate` no terminal
+
+### Testes Unitários
+
+#### Execução Simples
+```bash
+pytest test_main.py -v
+```
+
+#### Execução com Cobertura
+```bash
+pytest test_main.py --cov=main --cov-report=term-missing --cov-report=html
+```
+
+#### Execução por Categoria
+```bash
+# Apenas testes unitários
+pytest test_main.py -m "not integration" -v
+
+# Apenas testes de integração
+pytest test_main.py -m integration -v
+```
+
+#### Script Automatizado
+```bash
+./run_tests.sh
+```
