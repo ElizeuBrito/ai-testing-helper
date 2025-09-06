@@ -6,8 +6,8 @@ echo "🚀 Iniciando execução dos testes unitários..."
 echo "================================================"
 
 # Definir o caminho do Python do ambiente virtual
-PYTHON_PATH="/home/caiquecamargo/git/pucminas/ia-generativa/ai-testing-helper/.venv/bin/python"
-PYTEST_PATH="/home/caiquecamargo/git/pucminas/ia-generativa/ai-testing-helper/.venv/bin/pytest"
+PYTHON_PATH="./.venv/bin/python"
+PYTEST_PATH="./.venv/bin/pytest"
 
 # Verificar se o ambiente virtual existe
 if [ ! -f "$PYTHON_PATH" ]; then
