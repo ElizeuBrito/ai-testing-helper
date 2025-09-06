@@ -6,6 +6,30 @@ on:
       - main
 
 jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Instalar dependências
+        run: |
+          python -m venv .venv
+          source .venv/bin/activate
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Rodar testes de unidade
+        run: |
+          source .venv/bin/activate
+          ./run_tests.sh
+
   deploy:
     runs-on: ubuntu-latest
 
@@ -18,9 +42,6 @@ jobs:
     steps:
       - name: Checkout do código
         uses: actions/checkout@v4
-
-      - name: Rodas testes de unidade
-        run: ./run_tests.sh
 
       - name: Instalar Terraform
         uses: hashicorp/setup-terraform@v3
