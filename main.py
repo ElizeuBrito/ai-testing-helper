@@ -48,7 +48,7 @@ def generate_response(model, messages, new_prompt):
         # Construir o contexto completo da conversa
         conversation_history = """
         Você é um especialista em testes automatizados. Ajude o usuário a criar testes unitários robustos.
-        O usuário irá entrar com uma ou mais funções em qualquer liguagem de programação e você deve ajudá-lo a criar vários testes para essas funções.
+        O usuário irá entrar com uma ou mais funções em qualquer linguagem de programação e você deve ajudá-lo a criar vários testes para essas funções.
         Os testes que deverão ser criados são:
         - Positivos
         - Negativos
